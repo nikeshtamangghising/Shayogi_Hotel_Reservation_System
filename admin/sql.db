@@ -1,0 +1,74 @@
+CREATE TABLE Rooms (
+  RoomId INT AUTO_INCREMENT PRIMARY KEY,
+  CustomNo INT,
+  RoomType VARCHAR(255),
+  RoomName VARCHAR(255),
+  AttachBathroom BOOLEAN,
+  NonSmokingRoom BOOLEAN,
+  Price DECIMAL(10, 2),
+  TotalOccupancy INT
+);
+
+CREATE TABLE BedTypes (
+  BedTypeId INT AUTO_INCREMENT PRIMARY KEY,
+  RoomId INT,
+  BedType VARCHAR(255),
+  NumberOfBeds INT,
+  FOREIGN KEY (RoomId) REFERENCES Rooms (RoomId) ON DELETE CASCADE
+);
+
+-- Table for staff members
+CCREATE TABLE Staff (
+  staff_id INT PRIMARY KEY,
+  staff_fullname VARCHAR(100),
+  staff_position VARCHAR(50),
+  staff_salary DECIMAL(10, 2),
+  hire_date DATE,
+  balance DECIMAL(10, 2),
+  staff_phone VARCHAR(20),
+  staff_email VARCHAR(100)
+);
+
+CREATE TABLE Withdrawals (
+  withdrawal_id SERIAL PRIMARY KEY,
+  staff_id INT,
+  withdrawal_date DATE,
+  withdrawal_amount DECIMAL(10, 2),
+  withdrawal_reason VARCHAR(200),
+  FOREIGN KEY (staff_id) REFERENCES Staff (staff_id)
+);
+
+-- Create the trigger
+DELIMITER //
+CREATE TRIGGER update_staff_balance_trigger AFTER INSERT ON Withdrawals
+FOR EACH ROW
+BEGIN
+  -- Update the staff's balance
+  UPDATE Staff
+  SET balance = balance - NEW.withdrawal_amount
+  WHERE staff_id = NEW.staff_id;
+END //
+DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateStaffBalance()
+BEGIN
+  -- Update the balance for each staff member
+  UPDATE Staff
+  SET balance = balance + (staff_salary / DAY(LAST_DAY(CURRENT_DATE()))) -- Divide salary by total days in the month
+  WHERE hire_date <= LAST_DAY(CURRENT_DATE());
+END //
+
+DELIMITER ;
+
+CREATE EVENT DailyBalanceUpdate
+ON SCHEDULE EVERY 1 DAY
+STARTS CURRENT_TIMESTAMP + INTERVAL 1 DAY
+ON COMPLETION PRESERVE
+DO
+  CALL UpdateStaffBalance();
+
+

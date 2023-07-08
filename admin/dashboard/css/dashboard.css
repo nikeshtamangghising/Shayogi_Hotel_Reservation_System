@@ -1,0 +1,289 @@
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    padding: 0;
+    }
+#c_Panel{
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../img/wallpaper.png');
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns:  1fr;
+    grid-template-rows: 0.05fr 1fr 0.07fr;
+    grid-template-areas:
+    'navbar'
+    'contentBody'
+    'taskbar';
+}
+#nav_Bar{
+grid-area: navbar;
+background-color: brown;
+}
+#content_Body{
+grid-area: contentBody;
+position: relative;
+}
+#task_Bar{
+grid-area: taskbar;
+width: 100%;
+background-color: #FFF5;
+vertical-align: middle;
+text-align: left;
+justify-content: center;
+backdrop-filter: blur(7px);
+margin-top: 4px;
+}
+
+ .inputField {
+        margin-top: 2.5rem;
+        position: relative;
+    }
+.inputField input{
+    position: relative;
+    font-weight:600;
+    font-size:small;
+    height: 2rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 0.2rem solid rgba(42, 100, 102, 0.596); 
+    width: 100%;
+    height: 100%;
+}
+.inputField input:focus ~ label,
+.inputField input:valid ~ label {
+    transform: translateY(-1.2rem);
+    font-size: 1.1rem;
+    color: #002aff;
+}
+
+.inputField label{
+    position: absolute;
+    bottom: 0.3rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    }
+
+/*
+User Management css
+User Management css
+User Management css
+*/
+.title_Explorer{
+    justify-content: space-between;
+}
+#btn_adduser{
+    padding-right: 3rem;
+}
+#btn_adduser img{
+    height: 25px;
+    width: 25px;
+}
+#Manage_User table{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#Manage_User table th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #dfd1defe;
+}
+#Manage_User table  tr:nth-child(odd){
+    background-color: #fff6;
+}
+#Manage_User table  tr:hover{
+    background-color: #fff;
+}
+#Manage_User table,td,th {
+    padding: 1rem;
+    border-collapse: collapse;
+}
+@media (min-width: 1000px){
+    td:not(:first-of-type){
+        min-width: 12.1rem;
+    }
+}
+#Manage_User table button{
+    width: fit-content;
+    height: fit-content;
+}
+#Manage_User table img{
+    margin-right: 25px;
+height: 40px;
+width: 40px;
+}
+
+
+/*
+User Management css
+User Management css
+User Management css
+*/
+
+
+
+
+/*
+Add USer css
+Add USer css
+Add USer css
+*/
+#Add_User{
+    width: 30rem !important;
+}
+@media (max-width: 480px){
+    #Add_User{
+    width: 95% !important;
+}
+}
+#edit_User{
+    display: none;
+}
+#Add_User .explorer_Box .addUserData{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items:center ;
+}
+#add_LoginUser{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items:center;
+    }
+    #Add_User .addUserData button{
+        margin-top: 2rem;
+    }
+    #add_LoginUser button{
+    color: #000000;
+    font-weight: bolder;
+    font-size: large;
+    background: transparent;
+    outline: none;
+    border: 0.1rem solid #002aff; 
+    border-radius: 6rem;
+    padding: 0.5rem;
+}
+
+/*
+Add USer css
+Add USer css
+Add USer css
+*/
+/*
+Manage Room css
+Manage Room css
+Manage Room css
+*/
+.rightNavBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-right: 25px;
+}
+.rightNavBar img{
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+    margin-right: 0.8rem !important;
+}
+.rightNavBar button{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+#manageRoom table{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#manageRoom table th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #dfd1defe;
+}
+#manageRoom table  tr:nth-child(odd){
+    background-color: #fff6;
+}
+#manageRoom table  tr:hover{
+    background-color: #fff;
+}
+#manageRoom table,td,th {
+    padding: 1rem;
+    border-collapse: collapse;
+}
+@media (min-width: 1000px){
+    td:not(:first-of-type){
+        min-width: 12.1rem;
+    }
+}
+#manageRoom table button{
+    width: fit-content;
+    height: fit-content;
+}
+#manageRoom table img{
+    margin-right: 25px;
+height: 40px;
+width: 40px;
+}
+/*
+Manage Room css
+Manage Room css
+Manage Room css
+*/
+
+
+
+/*
+Add Room css
+Add Room css
+Add Room css
+*/
+#addRoom{
+    width: 22rem !important;
+}
+#addRoom form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+justify-content: center;
+align-items: center;
+}
+#addRoom .inputField, #addRoom #room-select , #addRoom #roomname-select,
+ #addRoom #bedtypeselect{
+    width: 17rem !important;
+} 
+ #addRoom #divAttachBathroom, #addRoom #divTotaloccupancy, #addRoom #divNon-SmokingRoom, #addRoom #divbednoSelect{
+    width: 17rem !important;
+    display: flex;
+    justify-content: space-between;
+
+ }
+
+#addRoom  .inputField input:valid ~ label {
+    transform: translateY(-1.2rem);
+    font-size: 1.1rem;
+    color: #002aff;
+}
+#addRoom form *[data-division="bed"]{
+    display: none;
+}
+.editroomdetailBtn{
+    display: none;
+}
+/*
+Add Room css
+Add Room css
+Add Room css
+*/
