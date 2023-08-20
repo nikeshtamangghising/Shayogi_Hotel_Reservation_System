@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="dashboard/css/dashboard.css">
     <link rel="stylesheet" href="dashboard/css/taskbar.css">
     <link rel="stylesheet" href="dashboard/css/menu.css">
-    <link rel="stylesheet" href="dashboard/css/fileExplorer.css" defer>
+    <link rel="stylesheet" href="dashboard/css/fileExplorer.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
     <!-- CSS Section End -->
 </head>
 
@@ -28,7 +31,7 @@
                 <div class="file_Explorer">
                     <div class="title_Explorer">
                         <div>
-                            <button type="button" onclick="clsBtn('Manage_User')">
+                            <button type="button" onclick="clsBtn('#Manage_User')">
                                 <img src="img/button/Close_Button.svg" alt="Close Button">
                             </button>
                             <button type="button" onclick="exp_Btn('Manage_User')">
@@ -40,7 +43,7 @@
                         </div>
                         <div class="windowHeading">Manage User</div>
                         <div>
-                            <button type="button" id="btn_adduser">
+                            <button type="button" id="btn_adduser" onclick="openBtn('#Add_User')">
                                 <img src="img/button/adduser.png" alt="Add User Button">
                             </button>
                         </div>
@@ -71,7 +74,7 @@
                     <div class="title_Explorer">
                         <div class="title_adjust">
                             <div class="title_Btn">
-                                <button type="button" onclick="clsBtn('Add_User')">
+                                <button type="button" onclick="clsBtn('#Add_User')">
                                     <img src="img/button/Close_Button.svg" alt="Close Button">
                                 </button>
                                 <button type="button" onclick="exp_Btn('Add_User')">
@@ -104,8 +107,8 @@
                                     <label for="email">Email</label>
                                 </div>
 
-                                <button id="add_User">Add User</button>
-                                <button id="edit_User">Edit User</button>
+                                <button class="adduserdetailBtn">Add User</button>
+                                <button class="edituserdetailBtn">Edit User</button>
                             </form>
                         </div>
                     </div>
@@ -114,18 +117,22 @@
             <!-- Menu Section Start -->
             <div id="explorerBox">
                 <div class="menuBox">
-                    <button onclick="openBtn('Manage_User')">
+                    <button onclick="openBtn('#Manage_User')">
                         <img src="img/button/manageuser.png" alt="Manage User" class="menuImg"><br>Manage User
                     </button>
-                    <button onclick="openBtn('staff_Section')">
+                    <button onclick="openBtn('#staff_Section')">
                         <img src="img/button/managestaff.png" alt="Manage Staff" class="menuImg"><br>Manage Staff
                     </button>
-                    <button onclick="openBtn('manageRoom')">
+                    <button onclick="openBtn('#manageRoom')">
                         <img src="img/button/manageroom.png" alt="Manage Room" class="menuImg"><br>Manage Room
                     </button><br>
-                    <button>Manage User</button>
-                    <button>Manage User</button>
-                    <button>Manage User</button>
+                    <button onclick="openBtn('#aviable_Section')">
+                        <img src="img/button/Reservations.png" alt="Reservations" class="menuImg"><br>Reservations
+                    </button>
+                    <button onclick="openBtn('#updatecalendarSection')">
+                        <img src="img/button/updateCalendar.png" alt="Update Calendar" class="menuImg"><br>Update
+                        Calendar
+                    </button>
                     <button>Manage User</button>
                     <button>Manage User</button>
                 </div>
@@ -135,7 +142,7 @@
                 <div class="file_Explorer">
                     <div class="title_Explorer">
                         <div>
-                            <button type="button" onclick="clsBtn('manageRoom')">
+                            <button type="button" onclick="clsBtn('#manageRoom')">
                                 <img src="img/button/Close_Button.svg" alt="Close Button">
                             </button>
                             <button type="button" onclick="exp_Btn('manageRoom')">
@@ -147,7 +154,7 @@
                         </div>
                         <div class="windowHeading">Manage Rooms</div>
                         <div class="rightNavBar">
-                            <button type="button" onclick="openBtn('addRoom')">
+                            <button type="button" onclick="openBtn('#addRoom')">
                                 <img src="img/button/add.png" alt="Add Button"><img src="img/button/room.png"
                                     alt="Rooms">
                             </button>
@@ -182,7 +189,7 @@
                     <div class="title_Explorer">
                         <div class="title_adjust">
                             <div class="title_Btn">
-                                <button type="button" onclick="clsBtn('addRoom')">
+                                <button type="button" onclick="clsBtn('#addRoom')">
                                     <img src="img/button/Close_Button.svg" alt="Close Button">
                                 </button>
                                 <button type="button" onclick="exp_Btn('addRoom')">
@@ -353,7 +360,7 @@ for ($i = 1; $i <= 50; $i++) {
 ?>
                                 </select></div>
                             <div class="inputField" data-division="room">
-                                <input type="text" name="Price" required>
+                                <input type="number" name="Price" required>
                                 <label for="username">Price</label>
                             </div>
                             <button class="addroomdetailBtn" data-division="room">Add Room</button>
@@ -368,12 +375,13 @@ for ($i = 1; $i <= 50; $i++) {
             </div>
             <!-- Room Section End -->
 
+
             <!--Manage Room-->
             <div id="staff_Section">
                 <div class="file_Explorer">
                     <div class="title_Explorer">
                         <div>
-                            <button type="button" onclick="clsBtn('staff_Section')">
+                            <button type="button" onclick="clsBtn('#staff_Section')">
                                 <img src="img/button/Close_Button.svg" alt="Close Button">
                             </button>
                             <button type="button" onclick="exp_Btn('staff_Section')">
@@ -385,7 +393,7 @@ for ($i = 1; $i <= 50; $i++) {
                         </div>
                         <div class="windowHeading">Manage Staff</div>
                         <div class="rightNavBar">
-                            <button type="button" onclick="openBtn('addstaffSection')">
+                            <button type="button" onclick="openBtn('#addstaffSection')">
                                 <img src="img/button/add.png" alt="Add Button"><img src="img/button/room.png"
                                     alt="Rooms">
                             </button>
@@ -419,29 +427,207 @@ for ($i = 1; $i <= 50; $i++) {
                     <div class="title_Explorer">
                         <div class="title_adjust">
                             <div class="title_Btn">
-                                <button type="button" onclick="clsBtn('addstaffSection')">
+                                <button type="button" onclick="clsBtn('#addstaffSection')">
                                     <img src="img/button/Close_Button.svg" alt="Close Button">
                                 </button>
-                                <button type="button" onclick="exp_Btn('addstaffSection')">
+                                <button type="button" onclick="exp_Btn('#addstaffSection')">
                                     <img src="img/button/Maximize_Button.svg" alt="Expand Button">
                                 </button>
                                 <button type="button">
                                     <img src="img/button/Minimize_Button.svg" alt="Minimize Button">
                                 </button>
                             </div>
-                            <div class="title_heading">Manage Room</div>
+                            <div class="title_heading">Manage Staff</div>
                         </div>
                     </div>
                     <div class="explorer_Box">
-
+                        <form>
+                            <div class="inputField">
+                                <input type="text" name="StaffName" required>
+                                <label for="StaffName">Staff Name</label>
+                            </div>
+                            <div class="inputField">
+                                <input type="text" name="Position" required>
+                                <label for="Position">Position</label>
+                            </div>
+                            <div class="inputField">
+                                <input type="number" name="Salary" required>
+                                <label for="Salary">Salary</label>
+                            </div>
+                            <div class="inputField">
+                                <input type="text" name="Phone" required>
+                                <label for="Phone">Phone No</label>
+                            </div>
+                            <div class="inputField">
+                                <input type="email" name="Staffemail" required>
+                                <label for="Staffemail">Email</label>
+                            </div>
+                            <div class="inputField" id="inputFielddate">
+                                <input type="date" name="HireOn" required>
+                                <label for="HireOn">Hire On</label>
+                            </div>
+                            <button class="addstaffdetailBtn">Add Staff</button>
+                            <button class="editstaffdetailBtn">Edit Staff</button>
+                            <button class="withdrawdetailBtn">Withdraw</button>
+                            <button class="withdrawdetailBtn">Check Statement</button>
+                        </form>
                     </div>
                 </div>
-
-
             </div>
             <!-- Room Section End -->
+            <!-- updatecalendarSection Section Start -->
+            <div id="updatecalendarSection">
+                <div class="file_Explorer">
+                    <div class="title_Explorer">
+                        <div class="title_adjust">
+                            <div class="title_Btn">
+                                <button type="button" onclick="clsBtn('#updatecalendarSection')">
+                                    <img src="img/button/Close_Button.svg" alt="Close Button">
+                                </button>
+                                <button type="button" onclick="exp_Btn('#updatecalendarSection')">
+                                    <img src="img/button/Maximize_Button.svg" alt="Expand Button">
+                                </button>
+                                <button type="button">
+                                    <img src="img/button/Minimize_Button.svg" alt="Minimize Button">
+                                </button>
+                            </div>
+                            <div class="title_heading">Update Room Calendar</div>
+                        </div>
+                    </div>
+                    <div class="explorer_Box">
+                        <form>
+                            <div class="inputField">
+                                <input type="text" name="RoomId" required>
+                                <label for="RoomId">Room ID</label>
+                            </div>
+                            <div class="inputField">
+                                <input type="text" name="Availability" required>
+                                <label for="Availability">Availability</label>
+                            </div>
+                            <div class="inputField" id="inputFielddate">
+                                <input type="date" name="StartDate" required>
+                                <label for="StartDate">Start Date</label>
+                            </div>
+                            <div class="inputField" id="inputFielddate">
+                                <input type="date" name="EndDate" required>
+                                <label for="EndDate">End Date</label>
+                            </div>
+                            <button class="update_RoomCalendar">Update Calendar</button>
+                            <button class="delete_RoomCalendar">Delete Calendar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- updatecalendarSection Section End -->
+            <div id="withdrawsection">
+                <div class="file_Explorer">
+                    <div class="title_Explorer">
+                        <div class="title_adjust">
+                            <div class="title_Btn">
+                                <button type="button" onclick="clsBtn('#withdrawsection')">
+                                    <img src="img/button/Close_Button.svg" alt="Close Button">
+                                </button>
+                                <button type="button" onclick="exp_Btn('#withdrawsection')">
+                                    <img src="img/button/Maximize_Button.svg" alt="Expand Button">
+                                </button>
+                                <button type="button">
+                                    <img src="img/button/Minimize_Button.svg" alt="Minimize Button">
+                                </button>
+                            </div>
+                            <div class="title_heading">Withdraw Money</div>
+                        </div>
+                    </div>
+                    <div class="explorer_Box">
+                        <form>
+                            <div class="inputField">
+                                <input type="number" name="withdrawamount" required>
+                                <label for="withdrawamount">Withdrawal Amount</label>
+                            </div>
+                            <div class="inputField" id="inputFielddate">
+                                <input type="date" name="Withdrawaldate" required>
+                                <label for="Withdrawaldate">Withdrawal Date</label>
+                            </div>
+                            <div class="inputField">
+                                <input type="text" name="withdrawreason" required>
+                                <label for="withdrawreason">Withdrawal Reason</label>
+                            </div>
+                            <button class="withdrawdetailBtn">Withdraw</button>
+                        </form>
+                        <div class="buttondesign"><button class="withdrawstatementdetailBtn">Check Statement</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Withdrawal Date</th>
+                                    <th>Withdrawal Amount</th>
+                                    <th>Withdrawal Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody id="withdrawdetailtable">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Body Section End -->
+        <!-- Add USER WINDOW -->
+        <div id="aviable_Section">
+            <div class="file_Explorer">
+                <div class="title_Explorer">
+                    <div class="title_adjust">
+                        <div class="title_Btn">
+                            <button type="button" onclick="clsBtn('#aviable_Section')">
+                                <img src="img/button/Close_Button.svg" alt="Close Button">
+                            </button>
+                            <button type="button" onclick="exp_Btn('aviable_Section')">
+                                <img src="img/button/Maximize_Button.svg" alt="Expand Button">
+                            </button>
+                            <button type="button">
+                                <img src="img/button/Minimize_Button.svg" alt="Minimize Button">
+                            </button>
+                        </div>
+                        <div class="title_heading">Reservations and Available Calender</div>
+                    </div>
+                </div>
+                <div class="explorer_Box">
+
+                    <div class="Calendarbox">
+                        <div class="wrapper">
+                            <header>
+                                <p class="current-date"></p>
+                                <div class="icons">
+                                    <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                                    <span id="next" class="material-symbols-rounded">chevron_right</span>
+                                </div>
+                            </header>
+                            <div class="calendar">
+                                <ul class="weeks">
+                                    <li>Sun</li>
+                                    <li>Mon</li>
+                                    <li>Tue</li>
+                                    <li>Wed</li>
+                                    <li>Thu</li>
+                                    <li>Fri</li>
+                                    <li>Sat</li>
+                                </ul>
+                                <ul class="days"></ul>
+                            </div>
+                        </div>
+                        <div class="Calendareventsbox">
+                            <div class="setectdate"></div>
+                            <div class="bookingdetails"></div>
+                        </div>
+                        <div class="Calendareventsbox">
+                            <div class="setectdateAvilable"></div>
+                            <div class="Availabledetails"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <!-- Taskbar Section Start -->
         <div id="task_Bar">
@@ -454,9 +640,10 @@ for ($i = 1; $i <= 50; $i++) {
 
     <!-- JavaScript Section Start -->
     <script src="dashboard/javascript/winCon.js"></script>
-    <script src="dashboard/javascript/dataManu.js"></script>
+    <script src="dashboard/javascript/user.js"></script>
     <script src="dashboard/javascript/room.js"></script>
     <script src="dashboard/javascript/staff.js"></script>
+    <script src="dashboard/javascript/calender.js"></script>
 </body>
 
 </html>

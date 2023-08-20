@@ -39,9 +39,21 @@ backdrop-filter: blur(7px);
 margin-top: 4px;
 }
 
- .inputField {
+ 
+    /*
+User Management css
+User Management css
+User Management css
+*/
+/*
+Form Small Window css
+Form Small Window css
+Form Small Window css
+*/
+.inputField {
         margin-top: 2.5rem;
         position: relative;
+        width: 100%;
     }
 .inputField input{
     position: relative;
@@ -68,11 +80,83 @@ margin-top: 4px;
     pointer-events: none;
     transition: all 0.3s ease;
     }
+    #inputFielddate label{
+        left: 45%;
+    }
+
+form, .buttondesign{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+form button, .buttondesign button {
+    width: 8rem;
+    height: 2.5rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #00000042;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.buttondesign button:before , form button:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.buttondesign button:active, form button:active {
+    color: #000000
+}
+
+.buttondesign button:active:after , form button:active:after {
+    background: transparent;
+}
+
+.buttondesign button:hover:before , form button:hover:before {
+    opacity: 1;
+}
+
+.buttondesign button:after ,form button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
 
 /*
-User Management css
-User Management css
-User Management css
+Form Small Window css
+Form Small Window css
+Form Small Window css
 */
 .title_Explorer{
     justify-content: space-between;
@@ -143,7 +227,7 @@ Add USer css
     width: 95% !important;
 }
 }
-#edit_User{
+.edituserdetailBtn{
     display: none;
 }
 #Add_User .explorer_Box .addUserData{
@@ -164,16 +248,7 @@ Add USer css
     #Add_User .addUserData button{
         margin-top: 2rem;
     }
-    #add_LoginUser button{
-    color: #000000;
-    font-weight: bolder;
-    font-size: large;
-    background: transparent;
-    outline: none;
-    border: 0.1rem solid #002aff; 
-    border-radius: 6rem;
-    padding: 0.5rem;
-}
+   
 
 /*
 Add USer css
@@ -242,9 +317,21 @@ Manage Room css
 Manage Room css
 Manage Room css
 */
+/*
+Update Calendar css
+Update Calendar css
+Update Calendar css
+*/
 
-
-
+#updatecalendarSection{
+    width: 30rem !important;
+    z-index: 20;
+}
+/*
+Update Calendar css
+Update Calendar css
+Update Calendar css
+*/
 /*
 Add Room css
 Add Room css
@@ -252,13 +339,6 @@ Add Room css
 */
 #addRoom{
     width: 22rem !important;
-}
-#addRoom form{
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-justify-content: center;
-align-items: center;
 }
 #addRoom .inputField, #addRoom #room-select , #addRoom #roomname-select,
  #addRoom #bedtypeselect{
@@ -287,3 +367,175 @@ Add Room css
 Add Room css
 Add Room css
 */
+
+/*
+Add Staff css
+Add Staff css
+Add Staff css
+*/
+#addstaffSection, #withdrawsection{
+    width: 22rem !important;
+    display: none;
+}
+
+
+/*
+Add Staff css
+Add Staff css
+Add Staff css
+*/
+/*
+Withdraw css
+Withdraw css
+Withdraw css
+*/
+#withdrawsection table{
+    display: none;
+}
+/*
+Withdraw css
+Withdraw css
+Withdraw css
+*/
+
+/* Calander
+*/ 
+#aviable_Section{
+    width: 80rem !important;
+    display: none;
+    height: 100% !important;
+}
+.Calendarbox{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.Calendareventsbox{
+width: fit-content;
+display: flex;
+flex-direction: column;
+align-items: center ;
+}
+.setectdate, .setectdateAvilable{
+    font-weight: bolder;
+    font-size:large;
+}
+.wrapper{
+  width: 450px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.12);
+}
+.wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 0px 20px;
+  justify-content: space-between;
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar{
+      padding: 0px 15px 2px 0px;
+}
+.calendar ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar .days{
+  margin-bottom: 20px;
+}
+.calendar li{
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+.calendar .weeks li{
+  font-weight: 500;
+  cursor: default;
+}
+.calendar .days li{
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+}
+.days li.inactive{
+  color: #aaa;
+}
+.days li.active{
+  color: #fff;
+}
+.days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.days li.active::before{
+  background: #9B59B6;
+}
+.days li:not(.active):hover::before{
+  background: #f2f2f2;
+}
+
+/* Booking Details */
+.roomcard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background-color: #f2f2f2;
+    margin: 20px;
+    border-radius: 10px;
+    font-size:small;
+    font-weight: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    overflow: auto;
+}
+.guestRevName{
+    display: flex;
+    flex-direction: column;
+}
+.Availablecard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background-color: #f2f2f2;
+    margin: 20px;
+    border-radius: 10px;
+    font-size:small;
+    font-weight: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    overflow: auto;
+}

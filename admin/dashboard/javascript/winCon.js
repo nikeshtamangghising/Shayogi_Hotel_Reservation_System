@@ -25,34 +25,32 @@ button.addEventListener("click", function() {
 //Close Button Java Script
 function clsBtn(closeWinID) {
   console.log("Close Button Clicked");
-  let closeBtn = document.getElementById(closeWinID);
-  closeBtn.style.display = 'none';
-  closeBtn.style.zIndex = 1;
+  var closeWin = $(closeWinID);
+  closeWin.hide().css('z-index', '0');
   closeFlagWindow[closeWinID] = true;
 
-  if (closeFlagWindow['addRoom']) {
-    $('#addRoom').css({
-      'display': 'none',
-      'z-index': '0'
-    });
-    $('.editroomdetailBtn').css({
-      'display': 'none',
-    });
-    
-    $('#addRoom form *[data-division="room"]').css({
-      'display': ''
-    });
-    $('#addRoom form *[data-division="bed"]').css({
-      'display': 'none'
-    });
+  if (closeFlagWindow['#addRoom']) {
+    $('.editroomdetailBtn').hide();
+    $('#addRoom form *[data-division="room"]').show();
+    $('#addRoom form *[data-division="bed"]').hide();
+    $('#addRoom form')[0].reset();
     closeFlagWindow[closeWinID] = false;
     return;
   }
 
-  if (closeFlagWindow['Add_User']) {
-    $('#add_User').show();
-    $('#edit_User').hide();
-    $('#add_LoginUser')[0].reset();
+  if (closeFlagWindow['#Add_User']) {
+    $('.adduserdetailBtn').show();
+    $('.edituserdetailBtn').hide();
+    $('#Add_User form')[0].reset();
+    closeFlagWindow[closeWinID] = false;
+    return;
+  }
+  
+  // Moved the if statement inside the clsBtn function
+  if (closeFlagWindow['#addstaffSection']) {
+    $('.addstaffdetailBtn').show();
+    $('.editstaffdetailBtn').hide();
+    $('#addstaffSection form')[0].reset();
     closeFlagWindow[closeWinID] = false;
     return;
   }
@@ -69,9 +67,8 @@ function clsBtn(closeWinID) {
 //Open Button Java Script
 function openBtn(openWinID) {
   console.log("Open Button Clicked");
-  let openBtn = document.getElementById(openWinID);
-  $(openBtn).show();
-  openBtn.style.zIndex = 20;
+  var openBtn = $(openWinID);
+  openBtn.show().css('z-index', '15');
 }
 
 //Open Button Java Script
@@ -112,22 +109,5 @@ function exp_Btn(winIDexp) {
 
 
 
-//Add User Button Javascript
-//Add User Button Javascript
-//Add User Button Javascript
-const addBtn = document.getElementById("btn_adduser");
-// Add an event listener for the click event
-addBtn.addEventListener("click", function() {
-  // Do something when the button is clicked
-  console.log("You clicked Open User Button");
-    var Add_UserBtn = document.getElementById("Add_User");
-  Add_UserBtn.style.display = 'flex';
-  Add_UserBtn.style.zIndex = 20;
-
-  
-});
-//Add User Button Javascript
-//Add User Button Javascript
-//Add User Button Javascript
 
 

@@ -9,6 +9,18 @@ CREATE TABLE Rooms (
   TotalOccupancy INT
 );
 
+
+  -- Create the Calendar table
+CREATE TABLE Calendar (
+  DateId INT NOT NULL PRIMARY KEY,
+  CalendarDate DATE NOT NULL,
+  Year INT NOT NULL,
+  Month INT NOT NULL,
+  Day INT NOT NULL,
+  RoomId INT,
+  FOREIGN KEY (RoomId) REFERENCES Rooms (RoomId) ON DELETE CASCADE
+);
+
 CREATE TABLE BedTypes (
   BedTypeId INT AUTO_INCREMENT PRIMARY KEY,
   RoomId INT,
@@ -70,5 +82,40 @@ STARTS CURRENT_TIMESTAMP + INTERVAL 1 DAY
 ON COMPLETION PRESERVE
 DO
   CALL UpdateStaffBalance();
+
+
+
+
+
+
+
+
+-- Populate the Calendar table with dates for two years (adjust the start and end dates accordingly)
+INSERT INTO Calendar (DateId, CalendarDate, Year, Month, Day, Weekday, IsWeekend)
+SELECT
+  ROW_NUMBER() OVER(ORDER BY DateValue) AS DateId,
+  DateValue AS CalendarDate,
+  YEAR(DateValue) AS Year,
+  MONTH(DateValue) AS Month,
+  DAY(DateValue) AS Day,
+  DAYOFWEEK(DateValue) AS Weekday,
+  DAYOFWEEK(DateValue) IN (1, 7) AS IsWeekend
+FROM (
+  SELECT CURDATE() + INTERVAL (seq + seq_month) DAY AS DateValue
+  FROM (
+    SELECT
+      t1.seq + t2.seq + t3.seq AS seq,
+      (t1.seq + t2.seq + t3.seq) * 30 AS seq_month
+    FROM (SELECT 0 AS seq UNION SELECT 1 AS seq UNION SELECT 2 AS seq UNION SELECT 3 AS seq) t1,
+         (SELECT 0 AS seq UNION SELECT 1 AS seq UNION SELECT 2 AS seq UNION SELECT 3 AS seq) t2,
+         (SELECT 0 AS seq UNION SELECT 1 AS seq) t3
+  ) AS days_alias
+  WHERE CURDATE() + INTERVAL (seq + seq_month) DAY <= CURDATE() + INTERVAL 2 YEAR
+) AS date_range;
+
+
+
+ALTER TABLE calendar
+ADD COLUMN room_id INT;
 
 

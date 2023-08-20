@@ -1,6 +1,7 @@
 // Global Variables
 let roomID = 0;
 let bedID = 0;
+let Availability = 0;
 
 // Show Room data Function
 // Show Room data Function
@@ -8,14 +9,14 @@ function showRoomData() {
   console.log("Showing Room Data");
   let output = '';
   $.ajax({
-    url: 'dashboard/showRoomData.php',
+    url: 'dashboard/roomphp/showRoomData.php',
     method: 'GET',
     dataType: 'json',
     success: function(data) {
       for (let i = 0; i < data.length; i++) {
         let attachBathroom = data[i].AttachBathroom === '1' ? 'Yes' : 'No';
         let nonSmokingRoom = data[i].NonSmokingRoom === '1' ? 'Yes' : 'No';
-        output += "<tr><td>" + data[i].CustomNo + "</td><td>" + data[i].RoomType + ' ' + data[i].RoomName + "</td><td>" + data[i].BedType + "</td><td>" + data[i].NumberOfBeds + "</td><td>" + attachBathroom + "</td><td>" + nonSmokingRoom + "</td><td>" + data[i].TotalOccupancy + "</td><td>" + data[i].Price + "</td><td><button class='deleteroom-button' data-id='" + data[i].RoomId + "'><img src='img/button/delete.png' alt='Delete'></button><button class='editroom-button' data-bid='"+data[i].BedTypeId+"' data-id='" + data[i].RoomId+"' data-CustomNo='" + data[i].CustomNo + "' data-RoomType='" + data[i].RoomType + "' data-RoomName='" + data[i].RoomName + "' data-BedType='" + data[i].BedType + "' data-NumberOfBeds='" + data[i].NumberOfBeds + "' data-AttachBathroom='" + data[i].AttachBathroom + "' data-NonSmokingRoom='" + data[i].NonSmokingRoom + "' data-TotalOccupancy='" + data[i].TotalOccupancy + "' data-Price='" + data[i].Price + "'><img src='img/button/edit.png' alt='Edit'></button><button class='addbed-button' data-id='" + data[i].RoomId+"'>Add</button><button class='deletebed-button' data-bid='"+data[i].BedTypeId+"'>Delete</button></td></tr>";
+        output += "<tr><td>" + data[i].CustomNo + "</td><td>" + data[i].RoomType + ' ' + data[i].RoomName + "</td><td>" + data[i].BedType + "</td><td>" + data[i].NumberOfBeds + "</td><td>" + attachBathroom + "</td><td>" + nonSmokingRoom + "</td><td>" + data[i].TotalOccupancy + "</td><td>" + data[i].Price + "</td><td><button class='deleteroom-button' data-id='" + data[i].RoomId + "'><img src='img/button/delete.png' alt='Delete'></button><button class='editroom-button' data-bid='"+data[i].BedTypeId+"' data-id='" + data[i].RoomId+"' data-CustomNo='" + data[i].CustomNo + "' data-RoomType='" + data[i].RoomType + "' data-RoomName='" + data[i].RoomName + "' data-BedType='" + data[i].BedType + "' data-NumberOfBeds='" + data[i].NumberOfBeds + "' data-AttachBathroom='" + data[i].AttachBathroom + "' data-NonSmokingRoom='" + data[i].NonSmokingRoom + "' data-TotalOccupancy='" + data[i].TotalOccupancy + "' data-Price='" + data[i].Price + "'><img src='img/button/edit.png' alt='Edit'></button><button class='addbed-button' data-id='" + data[i].RoomId+"'>Add</button><button class='deletebed-button' data-bid='"+data[i].BedTypeId+"'>Delete</button><button class='addcalander-button' data-id='"+data[i].RoomId+"'>Add Date</button></td></tr>";
       }
       $('#roomdataTable').html(output);
     }
@@ -28,7 +29,7 @@ $(document).on('click', '.deleteroom-button', function() {
   roomID = $(this).data('id');
   console.log("User Delete Key Click With ID: " + roomID);
   $.ajax({
-    url: 'dashboard/delRoom.php',
+    url: 'dashboard/roomphp/delRoom.php',
     method: 'POST',
     data: { ID: roomID },
     success: function(data) {
@@ -58,22 +59,88 @@ $(document).on('click', '.addbed-button', function () {
   roomID = $(this).data('id');
   // Convert variables to numbers if necessary
   roomID = parseInt(roomID);
-  $('#addRoom').css({
-  'display': 'flex',
-  'z-index': '50'
-  });
-$('#addRoom form *[data-division="room"]').css({
-  'display': 'none',
-});
-  $('#addRoom form *[data-division="bed"]').css({
-  'display': 'flex',
-  });
+  $('.editroomdetailBtn').hide();
+  $('#addRoom form *[data-division="room"]').hide();
+  $('#addRoom').show().css('z-index', 15);
+  $('#addRoom form *[data-division="bed"]').show();
 
   console.log(roomID);
 });
 
-// ADD Bed Function
-// ADD Brd Function
+// ADD Calendar Function
+$(document).on('click', '.addcalander-button', function () {
+  roomID = $(this).data('id');
+  Availability =  $(this).data('id');
+  // Convert variables to numbers if necessary
+  roomID = parseInt(roomID);
+  Availability = parseInt(Availability);
+  $('input[name="RoomId"]').val(roomID);
+  $('input[name="Availability"]').val(Availability);
+  $('#updatecalendarSection').show();
+  console.log(roomID);
+  console.log(Availability);
+});
+// Update Calendar Button On Click
+$(document).on('click', '.update_RoomCalendar', function () {
+    let roomID = $('input[name="RoomId"]').val();
+    let Availability = $('input[name="Availability"]').val();
+    let StartDate = $('input[name="StartDate"]').val();
+    let EndDate =  $('input[name="EndDate"]').val();
+
+    console.log(roomID);
+    console.log(Availability);
+    console.log(StartDate);
+    console.log(EndDate);
+
+    let data = {
+        RoomId: roomID, // Use 'RoomId' instead of 'roomID'
+        Availability: Availability,
+        StartDate: StartDate,
+        EndDate: EndDate
+    };
+
+    $.ajax({
+        url: 'dashboard/datephp/updatecalendar.php',
+        method: 'POST',
+        data: data,
+        success: function (data) {
+          alert(data);
+          refreshCalendar();
+        }
+    });
+});
+// Delete Calendar Button On Click
+$(document).on('click', '.delete_RoomCalendar', function () {
+    let roomID = $('input[name="RoomId"]').val();
+    console.log(roomID);
+
+    let data = {
+        RoomId: roomID, // Use 'RoomId' instead of 'roomID'
+    };
+
+    $.ajax({
+        url: 'dashboard/datephp/deletecalendar.php',
+        method: 'POST',
+        data: data,
+        success: function (data) {
+            alert(data);
+        }
+    });
+});
+
+// Refresh Calendar Button On Click
+function refreshCalendar() {
+    $.ajax({
+        url: 'dashboard/datephp/refreshcalendar.php',
+        method: 'POST',
+        success: function (data) {
+            alert(data); // Display the response from the PHP script
+        }
+    });
+}
+
+
+
 
 $(document).ready(function () {
 $('.addbeddetailBtn').click(function (e) {
@@ -100,16 +167,9 @@ $('.addbeddetailBtn').click(function (e) {
           showRoomData();
         }
       });
-    $('#addRoom').css({
-  'display': 'none',
-  'z-index': '0'
-  });
-$('#addRoom form *[data-division="room"]').css({
-  'display': '',
-});
-  $('#addRoom form *[data-division="bed"]').css({
-  'display': 'none',
-  });
+    $('#addRoom form *[data-division="room"]').show().css('z-index', 15);
+    $('#addRoom').hide().css('z-index', 0);
+    $('#addRoom form *[data-division="bed"]').hide().css('z-index', 0);
     }
   });
 });
@@ -156,7 +216,7 @@ $('.addroomdetailBtn').click(function (e) {
       return;
     }else {
       $.ajax({
-        url: 'dashboard/addroomDetails.php',
+        url: 'dashboard/roomphp/addroomDetails.php',
         method: 'POST',
         data: data,
         success: function (data) {
@@ -171,7 +231,7 @@ $('.addroomdetailBtn').click(function (e) {
   show_Data();
 });
 
-// Edit Button On Click
+// Edit Room Button On Click
 $(document).on('click', '.editroom-button', function () {
   roomID = $(this).data('id');
   bedID  = $(this).data('bid');
@@ -208,8 +268,7 @@ $('input[name="AttachBathroom"]').filter('[value="' + AttachBathroomvalue + '"]'
 $('input[name="Non-SmokingRoom"]').filter('[value="' + NonSmokingRoomvalue + '"]').prop('checked', true);
   $('select[id="Totaloccupancy"]').val(TotalOccupancy);
   $('.editroomdetailBtn').show();
-  $('#addRoom').show();
-  $('#addRoom').css({'z-index': '50'});
+  $('#addRoom').show().css({'z-index': '15'});
     $('.addroomdetailBtn').hide();
 });
 
@@ -275,9 +334,9 @@ $(document).on('click', '.editroomdetailBtn', function (e) {
       success: function (data) {
         alert(data);
         showRoomData();
-        $('#addroomdetailBtn').show();
-        $('#editroomdetailBtn').hide();
-        $('#addRoom').css('display', 'none').css('z-index', -1);
+        $('#addroomdetailBtn').show().css('z-index', 10);
+      $('#editroomdetailBtn').hide().css('z-index', 0);
+        $('#addRoom').hide().css('z-index', 0);
         $('#addRoom form')[0].reset();
       }
     });
