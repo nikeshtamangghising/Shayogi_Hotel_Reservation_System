@@ -1,0 +1,52 @@
+ if ($row['TotalOccupancy'] >= $numberGuest && $row['Availabilities'] >= 1) {
+ $availableRooms[] = $row;
+ } else {
+ $RoomsAvailableInDateRange = false; // Only set to false if a room doesn't meet the criteria
+ }
+ if ($RoomsAvailableInDateRange === true) { // Corrected equality check
+ echo json_encode($availableRooms);
+ } else {
+ echo json_encode("Room Is Not Available On Given Date Range. Try Changing Date Range And Number Of Guests.");
+ }
+ <?php
+include 'db.php';
+$checkInDate = $_POST['checkInDate'];
+$checkOutDate = $_POST['checkOutDate'];
+$numberGuest = $_POST['numberGuest'];
+
+$interval = new DateInterval('P1D'); // 1 day interval
+
+$currentDate = new DateTime($checkInDate);
+$endDate = new DateTime($checkOutDate);
+$endDate->add($interval); // Adjust to include the check-out date
+
+$availableRooms = array();
+
+while ($currentDate < $endDate) {
+    $formattedDate = $currentDate->format('Y-m-d');
+
+    $sql = "SELECT Calendar.*, Rooms.*
+            FROM Calendar
+            INNER JOIN Rooms ON Calendar.RoomId = Rooms.RoomId
+            WHERE Calendar.Date = '{$formattedDate}' AND Rooms.TotalOccupancy >= {$numberGuest} AND Rooms.Availabilities >= 1 ";
+
+    $result = mysqli_query($conn, $sql);
+
+    $roomsAvailable = true;
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['TotalOccupancy'] < $numberGuest || $row['Availabilities'] < 1) {
+            $roomsAvailable = false;
+            break;
+        }
+    }
+
+    if ($roomsAvailable) {
+        $availableRooms[$formattedDate] = $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    $currentDate->add($interval);
+}
+
+echo json_encode($availableRooms);
+
+mysqli_close($conn);

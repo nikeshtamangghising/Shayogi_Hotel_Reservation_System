@@ -1,0 +1,37 @@
+<?php
+include 'db.php';
+
+$FullName = $_POST['FullName'];
+$Email = $_POST['Email'];
+$Phone = $_POST['Phone'];
+$ID_Verification = $_POST['ID_Verification'];
+$Country = $_POST['Country'];
+$Username = $_POST['Username'];
+$Password = sha1($_POST['Password']); // SHA-1 encoding for password
+$image_path = '';
+
+// Check if an image is uploaded
+if (isset($_FILES['Guest_image'])) {
+    $upload_dir = 'Image/Hotel/GuestImg/'; // Set your upload directory
+    $image_name = $_FILES['Guest_image']['name'];
+    $image_path = $upload_dir . $image_name;
+
+    // Move the uploaded image to the specified directory
+    if (move_uploaded_file($_FILES['Guest_image']['tmp_name'], $image_path)) {
+        echo "Image uploaded successfully.";
+    } else {
+        echo "Error: Unable to upload image.";
+        exit;
+    }
+}
+
+$sql = "INSERT INTO guests (FullName, Email, Phone, ID_Verification, Country, Username, Password, image_path) VALUES ('$FullName', '$Email', '$Phone', '$ID_Verification', '$Country', '$Username', '$Password', '$image_path')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Guest details added successfully.";
+} else {
+    echo "Error: Unable to add guest details.";
+}
+
+$conn->close();
+?>

@@ -1,0 +1,10 @@
+#c_Panel #task_Bar button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0.1rem;
+}
+#c_Panel #task_Bar button img {
+    width: 30px;
+    height: 30px;
+}

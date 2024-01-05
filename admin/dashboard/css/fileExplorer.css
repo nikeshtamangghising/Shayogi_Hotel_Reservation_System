@@ -1,0 +1,70 @@
+#staff_Section, #addRoom, #manageRoom, #Manage_User, #Add_User, #addstaffSection, #withdrawsection, #aviable_Section, #updatecalendarSection{
+    margin-top: 20px;
+    max-width: 98vw;
+    max-height: 80vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: absolute;
+    display: none;
+}
+.file_Explorer{
+    width: 95%;
+    background-color: #FFF5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: 0.8rem;
+    overflow: hidden;
+}
+.title_adjust{
+background-color: transparent;
+    display: grid;
+  grid-template-columns: auto 1fr;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.1rem;
+}
+.title_heading{
+    flex: 0 1 auto;
+  text-align: center;
+}
+.title_Btn{
+    flex: 0 0 auto;
+}
+.title_Explorer{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    background-color: #fff4;
+    padding: 0.8rem 1rem;
+    vertical-align: middle;
+}
+.file_Explorer  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0.1rem;
+
+}
+.file_Explorer button img{
+    height: 15px;
+    width: 15px;
+}
+.explorer_Box{
+    width: 95%; 
+    max-height: 70vh;
+    background:  linear-gradient(to right, #b9c54c3f, #3daae90c);
+    margin: 0.8rem auto;
+    border-radius: 0.6rem;
+    overflow: auto; 
+
+}
+.explorer_Box::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5em;
+}
+.explorer_Box::-webkit-scrollbar-thumb{
+    border-radius: 0.5rem;
+    background-color: #0004;
+    }
