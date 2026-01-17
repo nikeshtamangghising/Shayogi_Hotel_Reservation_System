@@ -1,165 +1,253 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+// Get room details from URL parameters
+$roomId = isset($_GET['roomId']) ? $_GET['roomId'] : '';
+$roomName = isset($_GET['roomName']) ? $_GET['roomName'] : '';
+$roomType = isset($_GET['roomType']) ? $_GET['roomType'] : '';
+$attachBathroom = isset($_GET['attachBathroom']) ? $_GET['attachBathroom'] : '';
+$nonSmokingRoom = isset($_GET['nonSmokingRoom']) ? $_GET['nonSmokingRoom'] : '';
+$totalOccupancy = isset($_GET['totalOccupancy']) ? $_GET['totalOccupancy'] : '';
+$availabilities = isset($_GET['availabilities']) ? $_GET['availabilities'] : '';
+$price = isset($_GET['price']) ? $_GET['price'] : '';
+$ImagePath = isset($_GET['ImagePath']) ? $_GET['ImagePath'] : 'images/hotel/rooms/101.jpg';
+$checkInDate = isset($_GET['checkInDate']) ? $_GET['checkInDate'] : '';
+$checkOutDate = isset($_GET['checkOutDate']) ? $_GET['checkOutDate'] : '';
+$numberGuest = isset($_GET['numberGuest']) ? $_GET['numberGuest'] : '';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Sahyogi Reservation System</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+// Fallback for empty image path
+if (empty($ImagePath) || $ImagePath === 'null') {
+    $ImagePath = 'images/hotel/rooms/101.jpg';
+}
 
-<body>
-    <div id="home"></div>
-    <section class="home_Navbar">
-        <div class="logopart">
-            <img src="Image/Hotel/logoblack.png" alt="Hotel Shayogi Logo System">
-        </div>
-        <div>
-            <ul class="home_Navmenu">
-                <li> <a href="#home">Home</a> </li>
-                <li> <a href="#about">About</a> </li>
-                <li> <a href="#gallery">Gallery</a> </li>
-                <li> <a href="#review">Guest Review</a> </li>
-                <li> <a href="#contact">Contact</a> </li>
-            </ul>
-        </div>
-        <div class="navbar_rightside">
-            <a href="#"><i class="fa-brands fa-instagram"></i></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-solid fa-circle-user"></i></a>
-        </div>
-    </section>
-    <section class="bookRoomSection">
-        <?php
-// Retrieve the data values from query parameters
-$roomId = $_GET["roomId"];
-$roomName = $_GET["roomName"];
-$roomType = $_GET["roomType"];
-$attachBathroom = $_GET["attachBathroom"];
-$nonSmokingRoom = $_GET["nonSmokingRoom"];
-$totalOccupancy = $_GET["totalOccupancy"];
-$availabilities = $_GET["availabilities"];
-$price = $_GET["price"];
-$ImagePath = $_GET["ImagePath"];
-$numberGuest = $_GET["numberGuest"];
-$checkOutDate = $_GET["checkOutDate"];
-$checkInDate = $_GET["checkInDate"];
+$pageTitle = "$roomName - Book Your Stay";
+include 'includes/header.php';
 ?>
 
-        <h1>Hotel Shayogi Nepal</h1>
-        <div class="roomBookingDataForm">
-            <div>
-                <img src="<?php echo $ImagePath; ?>">
-                <div class="roomDetailsCard">
-                    <input type="text" name="RoomID" value=" <?php echo $roomId; ?>" required>
-                    <div>Room Name: <?php echo $roomName; ?></div>
-                    <div>Room Type: <?php echo $roomType; ?></div>
-                </div>
-                <div class="roomDetailsCard">
-                    <div>Attach Bathroom: <?php echo $attachBathroom; ?></div>
-                    <div>Non-Smoking Room: <?php echo $nonSmokingRoom; ?></div>
-                </div>
-                <div class="roomDetailsCard">
-                    <div>Total Occupancy: <?php echo $totalOccupancy; ?></div>
-                    <div>Availabilities: <?php echo $availabilities; ?></div>
-                </div>
-                <div class="roomDetailsCard">
-                    <div>Price: <?php echo $price; ?></div>
-                </div>
 
-                <div>
-                    <div class="inputField">
-                        <input type="text" name="fullName" id="fullName" required>
-                        <label for="fullName">Full Name</label>
-                    </div>
-                    <div class="inputField" id="guestEmail">
-                        <input type="email" name="guestEmail" id="guestEmail" required>
-                        <label for="guestEmail">Email</label>
-                        <input type="text" name="guestCountry" id="guestCountry" required>
-                        <label for="guestCountry">Country</label>
-                    </div>
-                    <div class="inputField">
-                        <input type="number" name="guestPhone" id="guestPhone" required>
-                        <label for="guestPhone">Phone Number</label>
-                        <input type="text" name="guestVerifyID" id="guestVerifyID" required>
-                        <label for="guestVerifyID">ID Verification</label>
-                    </div>
-                    <div class="book_RoomButton">
-                        <button class="book_Room_Button" data-roomid="<?php echo $roomId; ?>"
-                            data-guestno="<?php echo $numberGuest; ?>" data-checkin="<?php echo $checkInDate; ?>"
-                            data-checkout="<?php echo $checkOutDate; ?>">Book Room</button>
-                    </div>
-
+<!-- Main Content -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <!-- Room Gallery -->
+            <div class="room-gallery fade-in">
+                <div class="gallery-main">
+                    <img src="<?php echo htmlspecialchars($ImagePath); ?>" 
+                         alt="<?php echo htmlspecialchars($roomName); ?>"
+                         id="mainImage"
+                         onerror="this.src='images/hotel/rooms/101.jpg'">
                 </div>
-
-
-            </div>
-    </section>
-    <section class="footer_container" id="contact">
-        <div class="upperFooter">
-            <div>
-                <ul>
-                    <li id="headingfoot">Contact Info</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-address-book"><a href="#"></i>Shree
-                        Krishna
-                        Karki</a></li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-address-book"><a href="#"></i>Nikesh
-                        Tamang</a></li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-phone"></i>+977 9861171281</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-location-dot"></i>Bhaktapur, Nepal
-                    </li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-brands fa-whatsapp"></i>+977 9865214521</li>
-                </ul>
+                <div class="gallery-thumbnails">
+                    <div class="thumbnail active" data-image="<?php echo htmlspecialchars($ImagePath); ?>">
+                        <img src="<?php echo htmlspecialchars($ImagePath); ?>" alt="Main view" onerror="this.src='images/hotel/rooms/101.jpg'">
+                    </div>
+                    <div class="thumbnail" data-image="<?php echo htmlspecialchars($ImagePath); ?>">
+                        <img src="<?php echo htmlspecialchars($ImagePath); ?>" alt="Interior view" onerror="this.src='images/hotel/rooms/101.jpg'">
+                    </div>
+                    <div class="thumbnail" data-image="<?php echo htmlspecialchars($ImagePath); ?>">
+                        <img src="<?php echo htmlspecialchars($ImagePath); ?>" alt="Bathroom view" onerror="this.src='images/hotel/rooms/101.jpg'">
+                    </div>
+                    <div class="thumbnail" data-image="<?php echo htmlspecialchars($ImagePath); ?>">
+                        <img src="<?php echo htmlspecialchars($ImagePath); ?>" alt="View from room" onerror="this.src='images/hotel/rooms/101.jpg'">
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <ul>
-                    <li id="headingfoot">Services</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-mug-saucer"></i>Delicious Breakfast
-                    </li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-square-parking"></i>24 Hour Parking
-                    </li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-wifi"></i>WiFi Internet</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-broom"></i>Room Service</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-car"></i>Car Rentals</li>
-                </ul>
-            </div>
+            <!-- Room Information -->
+            <div class="room-info slide-in">
+                <h1 class="room-name"><?php echo htmlspecialchars($roomName); ?></h1>
+                <span class="room-type"><?php echo htmlspecialchars($roomType); ?></span>
+                
+                <div class="room-price">
+                    <span class="price-amount">NPR <?php echo htmlspecialchars($price); ?></span>
+                    <span class="price-period">per night</span>
+                </div>
 
-            <div>
-                <ul>
-                    <li id="headingfoot">Services</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-address-book"></i>Delicious
-                        Breakfast
-                    </li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-address-book"></i>24 Hour Parking
-                    </li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-phone"></i>WiFi Internet</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-solid fa-location-dot"></i>Room Service</li>
-                    <li id="contentfoot" id="contentfoot"><i class="fa-brands fa-whatsapp"></i>Car Rentals</li>
-                </ul>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Max Occupancy</h4>
+                            <p><?php echo htmlspecialchars($totalOccupancy); ?> guests</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-door-open"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Available Rooms</h4>
+                            <p><?php echo htmlspecialchars($availabilities); ?> remaining</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-bath"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Private Bathroom</h4>
+                            <p><?php echo htmlspecialchars($attachBathroom); ?></p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-smoking-ban"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Non-Smoking</h4>
+                            <p><?php echo htmlspecialchars($nonSmokingRoom); ?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Widget -->
+                <div class="booking-widget">
+                    <div class="widget-header">
+                        <h2>Complete Your Stay</h2>
+                        <p>Secure your reservation in just a few moments</p>
+                    </div>
+                    
+                    <div class="date-summary">
+                        <div class="date-item">
+                            <div class="date-label">Check-in</div>
+                            <div class="date-value"><?php echo htmlspecialchars($checkInDate); ?></div>
+                        </div>
+                        <div class="date-item">
+                            <div class="date-label">Check-out</div>
+                            <div class="date-value"><?php echo htmlspecialchars($checkOutDate); ?></div>
+                        </div>
+                    </div>
+
+                    <form id="bookingForm" class="booking-form">
+                        <input type="hidden" name="roomId" value="<?php echo htmlspecialchars($roomId); ?>">
+                        <input type="hidden" name="checkInDate" value="<?php echo htmlspecialchars($checkInDate); ?>">
+                        <input type="hidden" name="checkOutDate" value="<?php echo htmlspecialchars($checkOutDate); ?>">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Full Name *</label>
+                                <input type="text" 
+                                       id="fullName" 
+                                       name="fullName" 
+                                       class="form-input"
+                                       required 
+                                       placeholder="Your full name"
+                                       value="<?php echo $isLoggedIn && $currentUser ? htmlspecialchars($currentUser['name']) : ''; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="guestEmail" class="form-label">Email Address *</label>
+                                <input type="email" 
+                                       id="guestEmail" 
+                                       name="guestEmail" 
+                                       class="form-input"
+                                       required 
+                                       placeholder="your@email.com"
+                                       value="<?php echo $isLoggedIn && $currentUser ? htmlspecialchars($currentUser['email']) : ''; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guestPhone" class="form-label">Phone Number *</label>
+                                <input type="tel" 
+                                       id="guestPhone" 
+                                       name="guestPhone" 
+                                       class="form-input"
+                                       required 
+                                       placeholder="+977 98XXXXXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="guestCountry" class="form-label">Country *</label>
+                                <input type="text" 
+                                       id="guestCountry" 
+                                       name="guestCountry" 
+                                       class="form-input"
+                                       required 
+                                       value="<?php echo $isLoggedIn && $currentUser ? 'Nepal' : 'Nepal'; ?>"
+                                       placeholder="Your country">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guestVerifyID" class="form-label">ID Number *</label>
+                                <input type="text" 
+                                       id="guestVerifyID" 
+                                       name="guestVerifyID" 
+                                       class="form-input"
+                                       required 
+                                       placeholder="Passport or ID number">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberGuest" class="form-label">Number of Guests *</label>
+                                <input type="number" 
+                                       id="numberGuest" 
+                                       name="numberGuest" 
+                                       class="form-input"
+                                       value="<?php echo htmlspecialchars($numberGuest); ?>" 
+                                       min="1" 
+                                       max="<?php echo htmlspecialchars($totalOccupancy); ?>"
+                                       required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large btn-block" id="confirmBookingBtn">
+                                <i class="fa-solid fa-check"></i>
+                                <span class="btn-text">Confirm Reservation</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-large btn-block" onclick="history.back()">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                Back to Search
+                            </button>
+                        </div>
+                        
+                        <div id="bookingMessage" class="message-box"></div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="foottext">
-            <span id="footersocial"><span id="headingfoot">Social Account:</span><i class="fa-brands fa-facebook"><a
-                        href="#"></i>Facebook</a></span>
-            <span id="footersocial"><i class="fa-brands fa-instagram"></i><a href="#"></href>Instagram</a></span>
-            <span id="footersocial"><i class="fa-brands fa-tiktok"></i><a href="#">Tiktok</a></span>
-            <span id="footersocial"><i class="fa-brands fa-twitter"></i><a href="#">Twitter</a></span>
-        </div>
+    </div>
+</section>
 
-        <footer>
-            <div>Shayogi Reservation System</div>
-            <div>Copyright © Shayogi. All Rights Reserved.</div>
-            <div></div>
-        </footer>
-    </section>
+<script src="<?php echo $basePath; ?>javascript/modern-book.js"></script>
+<script>
+// Message display function for booking page
+function showMessage(message, type) {
+    console.log('showMessage called:', message, type);
+    const messageBox = document.getElementById('bookingMessage');
+    if (!messageBox) {
+        console.error('Message box not found!');
+        alert(message); // Fallback to alert
+        return;
+    }
+    
+    messageBox.className = 'message-box show message-' + type;
+    messageBox.textContent = message;
+    messageBox.style.display = 'block';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        messageBox.style.display = 'none';
+    }, 5000);
+}
 
-    <script src="javascript/book.js"></script>
-</body>
+// Debug: Check if form is being initialized
+$(document).ready(function() {
+    console.log('Bookroom page loaded');
+    console.log('Form exists:', $('#bookingForm').length);
+    console.log('jQuery version:', $.fn.jquery);
+    
+    // Add manual form submit handler as backup
+    $('#bookingForm').on('submit', function(e) {
+        console.log('Form submit triggered!');
+    });
+});
+</script>
 
-</html>
+<?php
+include 'includes/footer.php';
+?>

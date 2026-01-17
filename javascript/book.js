@@ -43,7 +43,7 @@ $(document).on('click', '.book_Room_Button', function () {
 
     // Make the AJAX request
     $.ajax({
-      url: 'php/roomBooked.php',
+      url: 'php/room_booked.php',
       method: 'POST',
       dataType: 'json',
       data: data,

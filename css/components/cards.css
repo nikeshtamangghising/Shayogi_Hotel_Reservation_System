@@ -1,0 +1,254 @@
+/* Card Component Styles */
+.card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Room Card Styles */
+.roomCard {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.roomCard:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--secondary-color);
+}
+
+.roomCard img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.roomCard:hover img {
+    transform: scale(1.05);
+}
+
+.roomdetailsCard {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.roomdetailsCard div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.roomdetailsCard div i {
+    width: 16px;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+/* Price Display Enhancement */
+.roomdetailsCard div:nth-last-child(2) {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0;
+    justify-content: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Availability Badge */
+.roomdetailsCard div:nth-child(2) {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Room Name Enhancement */
+.roomdetailsCard div:first-child {
+    background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Feature Tag */
+.feature-tag {
+    background: var(--bg-light-gray);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+/* Feature Card */
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.feature-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.feature-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.feature-info p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Review Card */
+.reviewCard {
+    min-width: 350px;
+    max-width: 350px;
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.reviewCard::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 80px;
+    color: var(--secondary-color);
+    opacity: 0.1;
+    font-family: Georgia, serif;
+}
+
+.reviewCard:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.reviewCard .guestImg {
+    margin-bottom: 20px;
+}
+
+.reviewCard .guestImg img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.reviewCard h2 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.reviewCard p {
+    color: #6a6d78;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Responsive card styles */
+@media (max-width: 768px) {
+    .roomCard img {
+        height: 200px;
+    }
+    
+    .roomdetailsCard {
+        padding: 15px;
+    }
+    
+    .roomdetailsCard div {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .bookNowBtn {
+        font-size: 14px;
+        min-height: 44px;
+        padding: 0px 20px;
+    }
+    
+    .reviewCard {
+        min-width: 280px;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .roomdetailsCard {
+        padding: 12px;
+    }
+    
+    .roomdetailsCard div {
+        font-size: 12px;
+        gap: 6px;
+    }
+}

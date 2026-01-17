@@ -1,13 +1,6 @@
 <?php
-// Database connection setup
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "Sahyogi";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->error);
-}
+/**
+ * Database Connection Wrapper
+ * Includes the central database configuration from includes folder
+ */
+require_once __DIR__ . '/../../includes/database.php';

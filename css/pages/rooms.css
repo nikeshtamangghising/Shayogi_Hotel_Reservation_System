@@ -1,0 +1,262 @@
+/* Rooms Page Specific Styles */
+.rooms-page {
+    padding-top: 80px;
+    min-height: calc(100vh - 160px);
+    background: var(--bg-light-gray);
+}
+
+.room-listing {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+}
+
+.room-filters {
+    background: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.filter-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+}
+
+.filter-group {
+    margin-bottom: 0;
+}
+
+.filter-label {
+    display: block;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: var(--space-xs);
+    font-size: 0.9rem;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 12px var(--space-sm);
+    border: 2px solid var(--bg-medium-gray);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    background-color: white;
+    color: var(--text-dark);
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.apply-filters {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-md);
+}
+
+/* Room Grid */
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-xl);
+}
+
+.room-item {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid var(--bg-medium-gray);
+}
+
+.room-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary-color);
+}
+
+.room-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.room-item:hover .room-image {
+    transform: scale(1.05);
+}
+
+.room-info {
+    padding: var(--space-lg);
+}
+
+.room-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--space-sm);
+}
+
+.room-description {
+    color: var(--dark-gray);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+}
+
+.room-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.room-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.room-feature i {
+    color: var(--secondary-color);
+}
+
+.room-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--bg-medium-gray);
+}
+
+.price-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.view-details {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.view-details:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-xl);
+    padding: var(--space-md) 0;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--bg-medium-gray);
+    background: white;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.page-link:hover,
+.page-link.active {
+    background: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+/* Sorting */
+.sort-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--space-lg);
+}
+
+.sort-select {
+    padding: 10px var(--space-sm);
+    border: 2px solid var(--bg-medium-gray);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    background-color: white;
+    color: var(--text-dark);
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    padding-right: 35px;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .room-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--space-lg);
+    }
+    
+    .filter-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .sort-options {
+        justify-content: center;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .room-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .room-item {
+        margin-bottom: var(--space-lg);
+    }
+    
+    .room-price {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+}
