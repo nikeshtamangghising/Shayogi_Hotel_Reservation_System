@@ -1,4 +1,9 @@
-/* Footer Styles */
+/* Backward Compatibility - Redirect to new organized CSS structure */
+
+/* This file is deprecated. Use css/components/footer.css instead. */
+
+/* Import the new footer styles */
+@import url('../components/footer.css');
 .footer_container {
     background: var(--primary-color);
     color: var(--text-light);

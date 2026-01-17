@@ -1,7 +1,8 @@
 <?php
 /**
- * Simple Dynamic Pricing Algorithm for Room Availability
+ * Enhanced Dynamic Pricing Algorithm for Room Availability
  * Implements real-time price adjustment based on demand factors
+ * Plus multi-image support for each room
  */
 
 include 'db.php';
@@ -10,9 +11,12 @@ $checkInDate = $_POST['checkInDate'];
 $checkOutDate = $_POST['checkOutDate'];
 $numberGuest = $_POST['numberGuest'];
 
-// Original query
+// Updated query to include room images
 $sql = "
- SELECT DISTINCT r.*,c.Availabilities
+ SELECT DISTINCT r.*, c.Availabilities,
+        (SELECT GROUP_CONCAT(ImagePath ORDER BY SortOrder, IsPrimary DESC) 
+         FROM room_images 
+         WHERE room_images.RoomId = r.RoomId) AS AllImages
         FROM Rooms r
         INNER JOIN Calendar c ON r.RoomId = c.RoomId
         WHERE c.Date BETWEEN '$checkInDate' AND '$checkOutDate'
@@ -35,6 +39,25 @@ while ($row = mysqli_fetch_assoc($result)) {
     $row['DynamicPrice'] = $dynamicPrice;
     $row['PriceDifference'] = round($dynamicPrice - $row['Price'], 2);
     $row['PriceChangePercent'] = round((($dynamicPrice - $row['Price']) / $row['Price']) * 100, 1);
+    
+    // Process the images array
+    $imagePaths = [];
+    if (!empty($row['AllImages'])) {
+        $imagePaths = explode(',', $row['AllImages']);
+    } else {
+        // Fallback to the original image path if no images in room_images table
+        if (!empty($row['imgpath'])) {
+            $imagePaths[] = $row['imgpath'];
+        } elseif (!empty($row['Imagepath'])) {
+            $imagePaths[] = $row['Imagepath'];
+        }
+    }
+    
+    // Store the image paths as an array
+    $row['ImagePaths'] = $imagePaths;
+    
+    // Set the first image as the main image for backward compatibility
+    $row['imgpath'] = !empty($imagePaths[0]) ? $imagePaths[0] : 'images/hotel/rooms/101.jpg';
     
     $availableRooms[] = $row;
 }

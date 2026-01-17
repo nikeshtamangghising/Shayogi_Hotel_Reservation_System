@@ -37,7 +37,6 @@ $currentUser = $isLoggedIn ? $auth->getCurrentUser() : null;
             display: flex;
             align-items: center;
             gap: 15px;
-            position: relative;
         }
         
         .navbar_rightside > a {
@@ -715,22 +714,22 @@ $currentUser = $isLoggedIn ? $auth->getCurrentUser() : null;
         </div>
         <div>
             <ul class="home_Navmenu">
-                <li><a href="<?php echo $basePath; ?>index.php">Home</a></li>
-                <li><a href="<?php echo $basePath; ?>index.php#about">About</a></li>
-                <li><a href="<?php echo $basePath; ?>index.php#gallery">Gallery</a></li>
-                <li><a href="<?php echo $basePath; ?>index.php#review">Guest Review</a></li>
-                <li><a href="<?php echo $basePath; ?>index.php#contact">Contact</a></li>
+                <li><a href="<?php echo $basePath; ?>index.php"><i class="nav-item-icon fas fa-home"></i> Home</a></li>
+                <li><a href="<?php echo $basePath; ?>index.php#about"><i class="nav-item-icon fas fa-info-circle"></i> About</a></li>
+                <li><a href="<?php echo $basePath; ?>index.php#gallery"><i class="nav-item-icon fas fa-images"></i> Gallery</a></li>
+                <li><a href="<?php echo $basePath; ?>index.php#review"><i class="nav-item-icon fas fa-star"></i> Guest Review</a></li>
+                <li><a href="<?php echo $basePath; ?>index.php#contact"><i class="nav-item-icon fas fa-phone"></i> Contact</a></li>
                 <?php if ($isLoggedIn): ?>
-                <li><a href="<?php echo $basePath; ?>rooms.php">Rooms</a></li>
+                <li><a href="<?php echo $basePath; ?>rooms.php"><i class="nav-item-icon fas fa-hotel"></i> Rooms</a></li>
                 <?php endif; ?>
             </ul>
         </div>
         <div class="navbar_rightside">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
             <div class="profile-dropdown">
-                <button type="button" id="userProfileDropdown" onclick="console.log('Direct click!'); toggleProfileMenu(event); return false;" 
+                <button type="button" id="userProfileDropdown" class="user-profile-button" onclick="console.log('Direct click!'); toggleProfileMenu(event); return false;" 
                         aria-label="User Profile Menu" aria-expanded="false" aria-haspopup="true" 
                         tabindex="0">
                     <i class="fas fa-user"></i>

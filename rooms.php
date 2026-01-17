@@ -474,8 +474,9 @@ include 'includes/header.php';
                 const nonSmokingRoom = room.NonSmokingRoom === '1' ? 'Yes' : 'No';
                 const badgeText = room.Availabilities > 3 ? 'Available' : (room.Availabilities > 0 ? 'Limited' : 'Sold Out');
                 
-                // Fix image path - use imgpath or ImagePath, with fallback
-                const imagePath = room.imgpath || room.ImagePath || 'images/hotel/rooms/101.jpg';
+                // Use multiple images if available, otherwise fallback to single image
+                const imagePaths = room.ImagePaths || [];
+                const imagePath = imagePaths.length > 0 ? imagePaths[0] : (room.imgpath || room.ImagePath || 'images/hotel/rooms/101.jpg');
                 
                 output += `
                     <div class="room-list-item" onclick='showRoomDetails(${JSON.stringify(room).replace(/'/g, "\\'")}); event.stopPropagation();'>
@@ -493,7 +494,7 @@ include 'includes/header.php';
                             <div class="room-price-inline">
                                 <div class="price-display-inline">
                                     <span class="price-currency">NPR</span>
-                                    <span class="price-amount">${room.Price}${room.DynamicPrice}</span>
+                                    <span class="price-amount">${room.DynamicPrice}</span>
                                 </div>
                                 <button class="book-now-inline" onclick='event.stopPropagation(); openBookingPHP(${JSON.stringify(room).replace(/'/g, "\\'")}); return false;'>
                                     Book Now
@@ -516,7 +517,7 @@ Type: ${room.RoomType}
 Capacity: ${room.TotalOccupancy} guests
 Bathroom: ${room.AttachBathroom === '1' ? 'Yes' : 'No'}
 Smoking: ${room.NonSmokingRoom === '1' ? 'Yes' : 'No'}
-Price: NPR ${room.Price}/night
+Price: NPR ${room.DynamicPrice}/night (Dynamic Price)
 
 Click Book Now to continue!`);
         }
@@ -560,11 +561,13 @@ Click Book Now to continue!`);
                 availabilities: room.Availabilities,
                 price: room.Price,
                 ImagePath: room.imgpath,
+                ImagePaths: JSON.stringify(room.ImagePaths),
                 checkInDate: new URLSearchParams(window.location.search).get('checkInDate'),
                 checkOutDate: new URLSearchParams(window.location.search).get('checkOutDate'),
                 numberGuest: new URLSearchParams(window.location.search).get('numberGuest')
             });
             
+            urlParams.append('dynamicPrice', room.DynamicPrice);
             window.location.href = `bookroom.php?${urlParams.toString()}`;
         }
     </script>

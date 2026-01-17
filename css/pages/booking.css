@@ -1,4 +1,19 @@
 /* Room Booking Page Specific Styles */
+
+/* Dynamic Price Note */
+.dynamic-price-note {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
 .room-detail-page {
     padding-top: 80px;
     min-height: 100vh;

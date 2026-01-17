@@ -83,6 +83,12 @@ $_SESSION['login_time'] = time();
                         <span>Calendar</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="room-images">
+                        <i class="fa-solid fa-images"></i>
+                        <span>Room Images</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         
@@ -332,6 +338,18 @@ $_SESSION['login_time'] = time();
                                 <div id="selectedDateDisplay">No date selected</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room Images Page -->
+            <div class="page" id="room-images-page" style="display: none;">
+                <div class="page-header">
+                    <h2>Room Images Management</h2>
+                </div>
+                <div class="content-card">
+                    <div class="card-content">
+                        <iframe src="dashboard/roomphp/manageRoomImages.php" width="100%" height="800px" frameborder="0"></iframe>
                     </div>
                 </div>
             </div>
@@ -623,6 +641,15 @@ $_SESSION['login_time'] = time();
                 if (page === 'calendar') {
                     loadRoomAvailability();
                     renderCalendar();
+                }
+                if (page === 'room-images') {
+                    // Refresh the iframe by resetting its src
+                    const iframe = $('#room-images-page iframe');
+                    const currentSrc = iframe.attr('src');
+                    iframe.attr('src', '');
+                    setTimeout(() => {
+                        iframe.attr('src', currentSrc);
+                    }, 100);
                 }
             });
 

@@ -1,4 +1,12 @@
-/* Room Detail and Booking Styles */
+/* Backward Compatibility - Redirect to new organized CSS structure */
+
+/* This file is deprecated. Use css/pages/booking.css instead. */
+
+/* Import the new booking styles */
+@import url('../pages/booking.css');
+@import url('../components/cards.css');
+@import url('../components/buttons.css');
+@import url('../components/forms.css');
 .room-detail-page {
     padding-top: 80px;
     min-height: calc(100vh - 160px);

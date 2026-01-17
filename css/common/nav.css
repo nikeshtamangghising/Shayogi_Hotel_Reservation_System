@@ -1,4 +1,9 @@
-/* Navigation Styles */
+/* Backward Compatibility - Redirect to new organized CSS structure */
+
+/* This file is deprecated. Use css/components/navbar.css instead. */
+
+/* Import the new navbar styles */
+@import url('../components/navbar.css');
 .home_Navbar {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
